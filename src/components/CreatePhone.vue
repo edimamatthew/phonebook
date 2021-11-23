@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <Modal v-if="showContactForm" v-on:closeModal="$emit('hideContactModal')">
+    <Modal v-if="showContactModal" v-on:closeModal="$emit('hideContactModal')">
       <template v-slot:header>Create a Contact</template>
 
       <template v-slot:submitButton>
@@ -17,7 +17,7 @@ import Modal from "./Modal.vue"
 
 export default {
   components: { Modal },
-  props: ["showContactForm"],
+  props: ["showContactModal"],
 
   methods: {
     submitCreateContact() {

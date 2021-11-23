@@ -1,10 +1,10 @@
 import { createStore } from "vuex";
-let endpoint = "http://localhost:4000/phonebook/";
+const endpoint = "http://localhost:4000/phonebook/";
 
 export default createStore({
   state: ()=> ({
     contacts: [],
-    createContact: {
+    contactData: {
       emailAddress: '',
       phoneNumber: '',
       firstName: '',
@@ -28,7 +28,7 @@ export default createStore({
       state.contacts = json
     },
     clearContactForm(state, json){
-      state.createContact = {
+      state.contactData = {
         emailAddress: '',
         phoneNumber: '',
         firstName: '',
@@ -40,19 +40,19 @@ export default createStore({
       state.errors = data
     },
     updatePhoneNumber(state, value){
-      state.createContact.phoneNumber = value
+      state.contactData.phoneNumber = value
     },
     updateEmailAddress(state, value){
-      state.createContact.emailAddress = value
+      state.contactData.emailAddress = value
     },
     updateFirstName(state, value){
-      state.createContact.firstName = value
+      state.contactData.firstName = value
     },
     updateLastName(state, value){
-      state.createContact.lastName = value
+      state.contactData.lastName = value
     },
     updateContactId(state, value){
-      state.createContact.id = value
+      state.contactData.id = value
     },
     
   },
@@ -78,7 +78,7 @@ export default createStore({
       try{
       let resp = await fetch(endpoint, {
         method: "POST",
-        body: JSON.stringify(context.state.createContact),
+        body: JSON.stringify(context.state.contactData),
         headers: {
           "Content-Type": "application/json"
         }
@@ -116,10 +116,10 @@ export default createStore({
     }
 
     let data = {
-      firstName: this.state.createContact.firstName,
-      lastName: this.state.createContact.lastName,
-      phoneNumber: this.state.createContact.phoneNumber,
-      emailAddress: this.state.createContact.emailAddress,
+      firstName: this.state.contactData.firstName,
+      lastName: this.state.contactData.lastName,
+      phoneNumber: this.state.contactData.phoneNumber,
+      emailAddress: this.state.contactData.emailAddress,
     }
     try{
       let resp = await fetch(endpoint + contactId, {
@@ -148,15 +148,14 @@ export default createStore({
       context.commit("setContact",json)
     },
   },
-  modules: {},
 });
 
 
 function validate(state){
-  let email = state.createContact.emailAddress
-  let phone = state.createContact.phoneNumber
-  let firstName = state.createContact.firstName
-  let lastName = state.createContact.lastName
+  let email = state.contactData.emailAddress
+  let phone = state.contactData.phoneNumber
+  let firstName = state.contactData.firstName
+  let lastName = state.contactData.lastName
   let ee: {[prop:string]:string} = {}
 
   if(!email || !validateEmail(email)){
@@ -175,6 +174,8 @@ function validate(state){
 }
 
 function validateEmail(email) {
-  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(email).toLowerCase());
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+    return true
+  }
+  return false
 }

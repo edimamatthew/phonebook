@@ -11,7 +11,7 @@
 
     <PhoneBook />
     <CreatePhone
-      :showContactForm="showContactModal"
+      :showContactModal="showContactModal"
       @hideContactModal="showContactModal = false"
     />
   </div>

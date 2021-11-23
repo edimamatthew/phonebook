@@ -63,9 +63,7 @@
       </tbody>
     </table>
     <div v-else>
-      <div class="no-contact">
-        No Contact Found.
-      </div>
+      <div class="no-contact">No Contact Found.</div>
     </div>
 
     <Modal v-if="showEditForm" v-on:closeModal="showEditForm = false">
@@ -81,40 +79,40 @@
 </template>
 
 <script>
-import Modal from "./Modal.vue";
+import Modal from "./Modal.vue"
 export default {
   components: { Modal },
   data: () => ({
     showEditForm: false,
   }),
   mounted() {
-    this.$store.dispatch("getContactData");
+    this.$store.dispatch("getContactData")
   },
   computed: {
     id: {
       get() {
-        return this.$store.state.createContact.id;
+        return this.$store.state.contactData.id
       },
       set(value) {
-        this.$store.commit("updateContactId", value);
+        this.$store.commit("updateContactId", value)
       },
     },
   },
   methods: {
     editContact(contactId) {
-      this.$store.dispatch("editContact", contactId);
-      this.showEditForm = true;
+      this.$store.dispatch("editContact", contactId)
+      this.showEditForm = true
     },
     submitUpdateContact(contactId) {
       this.$store.dispatch("updateContact", contactId).then((status) => {
         console.log(status)
         if (status === true) {
-            this.showEditForm = false
-            this.$toast.open({
-              message: 'Successfully updated',
-              type: 'success'
-            });
-          }
+          this.showEditForm = false
+          this.$toast.open({
+            message: "Successfully updated",
+            type: "success",
+          })
+        }
       })
     },
     deleteContact(contactId) {
@@ -122,15 +120,15 @@ export default {
         this.$store.dispatch("deleteContact", contactId).then((status) => {
           if (status === true) {
             this.$toast.open({
-              message: 'Successfully deleted',
-              type: 'success'
-            });
+              message: "Successfully deleted",
+              type: "success",
+            })
           }
         })
       }
     },
   },
-};
+}
 </script>
 
 <style scoped>
@@ -201,15 +199,15 @@ th {
     color: #000;
   }
 }
-.contact-options button{
+.contact-options button {
   border: 0;
   cursor: pointer;
-  background: transparent
+  background: transparent;
 }
-.contact-options button:first-child{
+.contact-options button:first-child {
   margin-right: 8px;
 }
-.no-contact{
+.no-contact {
   text-align: center;
   margin: 100px 0;
 }

@@ -4,11 +4,14 @@
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="modal-header">
-            <h3><slot name="header"> HEADER </slot></h3>
+            <h3><slot name="header"></slot></h3>
           </div>
 
           <div class="modal-body">
-            <div class="alert-danger" v-if="Object.keys($store.state.errors).length > 0">
+            <div
+              class="alert-danger"
+              v-if="Object.keys($store.state.errors).length > 0"
+            >
               <div
                 class="error"
                 v-for="error in $store.state.errors"
@@ -78,38 +81,38 @@ export default {
   computed: {
     phoneNumber: {
       get() {
-        return this.$store.state.createContact.phoneNumber;
+        return this.$store.state.contactData.phoneNumber
       },
       set(value) {
-        this.$store.commit("updatePhoneNumber", value);
+        this.$store.commit("updatePhoneNumber", value)
       },
     },
     emailAddress: {
       get() {
-        return this.$store.state.createContact.emailAddress;
+        return this.$store.state.contactData.emailAddress
       },
       set(value) {
-        this.$store.commit("updateEmailAddress", value);
+        this.$store.commit("updateEmailAddress", value)
       },
     },
     firstName: {
       get() {
-        return this.$store.state.createContact.firstName;
+        return this.$store.state.contactData.firstName
       },
       set(value) {
-        this.$store.commit("updateFirstName", value);
+        this.$store.commit("updateFirstName", value)
       },
     },
     lastName: {
       get() {
-        return this.$store.state.createContact.lastName;
+        return this.$store.state.contactData.lastName
       },
       set(value) {
-        this.$store.commit("updateLastName", value);
+        this.$store.commit("updateLastName", value)
       },
     },
   },
-};
+}
 </script>
 
 <style scoped>
