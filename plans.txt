@@ -1,0 +1,51 @@
+Vuex
+1. Create dummy nodejs server install express js and use bodyparser for json input
+2. Global empty object lets say data.
+3. When users submit json you need to take that input specify new id and add it data (push it data variable)
+4. provide end point /phonebook -> index of all numbers 
+5. endpoint to delete phone number 
+......
+make sure you validate whether server works properly or not via postman
+------------------------
+
+
+
+Create store
+create appropriate state
+
+so id, phone number etc goes to vuex store
+
+create actions for vuex
+
+
+modals etc. should from vuex
+
+
+create phone book index component
+and phone book item component
+
+Regarding the validation rule when user submits validate the data
+
+and show error related to the validation and if possible style item
+Id - It is created in backend
+
+
+import express from express
+
+app.use(bodyParser()) / json as input
+
+cors 
+
+
+let data = {}
+let lastId= 0;
+// id -> {id, phonenumber, email}
+
+app.post("/phonebook",(req)=>{
+    lastid++;
+
+    data[lastid] = {
+        id: lastid,
+        phonenumber: req.params.phoneNumber
+    }
+})
