@@ -42,13 +42,13 @@ export default createStore({
       }
     },
 
-    setUpdateData(state, cc) {
+    setUpdateData(state, data) {
       state.contactData = {
-        emailAddress: cc.emailAddress,
-        phoneNumber: cc.phoneNumber,
-        firstName: cc.firstName,
-        lastName: cc.lastName,
-        id: cc.id
+        emailAddress: data.emailAddress,
+        phoneNumber: data.phoneNumber,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        id: data.id
       }
     },
 
@@ -119,10 +119,10 @@ export default createStore({
     },
 
     editContact(context, contactId) {
-      let cc = context.state.contacts[contactId]
+      let data = context.state.contacts[contactId]
       context.commit("setError", {})
-      if(cc) {
-        context.commit("setUpdateData", cc)
+      if(data) {
+        context.commit("setUpdateData", data)
       }
     },
 
